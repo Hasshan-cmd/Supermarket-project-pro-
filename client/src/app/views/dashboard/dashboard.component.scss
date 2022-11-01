@@ -1,0 +1,46 @@
+.dashboard-box {
+  color: white;
+  padding: 10px;
+
+  .dashboard-box-data{
+
+    .dashboard-box-value{
+      font-size: 50px;
+      display: block;
+      margin-bottom: 25px;
+      margin-top: 25px;
+    }
+
+    .dashboard-box-label{
+      font-size: 20px;
+      display: block;
+      margin-bottom: 10px;
+    }
+  }
+
+  .dashboard-box-link{
+    text-align: center;
+  }
+}
+
+.dashboard-box-2{
+  padding: 10px;
+
+  .dashboard-box-data{
+
+    table {
+      width: 100%;
+    }
+
+    .dashboard-box-label{
+      font-size: 20px;
+      display: block;
+      margin-bottom: 10px;
+    }
+  }
+
+  .dashboard-box-link{
+    text-align: center;
+  }
+}
+

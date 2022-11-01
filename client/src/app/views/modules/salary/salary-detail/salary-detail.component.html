@@ -1,0 +1,102 @@
+<app-no-privilege *ngIf="!privilege.showOne" message="No privilege to show more details of a salary"></app-no-privilege>
+<app-object-not-found *ngIf="loaded && !salary" message="Salary Not Found"></app-object-not-found>
+<app-loading *ngIf="!loaded"></app-loading>
+<div *ngIf="salary && privilege.showOne">
+  <app-page-header
+    title="Salary Detail Page of {{ salary.code + ' - ' + salary.date }}"
+    [breadcrumbSegments]="['Salaries', 'Show All Salaries', 'Details of ' + salary.code + ' - '+ salary.date]"
+  ></app-page-header>
+  <div class="row">
+    <div class="col-md-4">
+      <mat-card class="">
+        <mat-card-title-group>
+          <mat-card-title>{{salary.employee.callingname}}</mat-card-title>
+          <mat-card-subtitle>Employee</mat-card-subtitle>
+          <img style="border-radius: 50%" *ngIf="!salary.employee.photo" mat-card-sm-image src="assets/image.png" >
+          <img style="border-radius: 50%" *ngIf="salary.employee.photo" mat-card-sm-image src="{{thumbnailURL}}{{salary.employee.photo}}" >
+        </mat-card-title-group>
+        <mat-card-content>
+          <table class="w-100 table-striped custom-data-table">
+            <tbody>
+            <tr>
+              <th>Code</th>
+              <td>{{salary.employee.code}}</td>
+            </tr>
+            <tr>
+              <th>Contacts</th>
+              <td>{{salary.employee.mobile}}<span *ngIf="salary.employee.land">,  </span>{{salary.employee.land}}</td>
+            </tr>
+            <tr>
+              <th>Address</th>
+              <td>{{salary.employee.address}}</td>
+            </tr>
+            <tr *ngIf="salary.employee.email">
+              <th>Email</th>
+              <td>{{salary.employee.email}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="mt-3">
+        <mat-card-content>
+          <table class="w-100 table-striped custom-data-table">
+            <tbody>
+            <tr>
+              <th>Created Date</th>
+              <td>{{salary.tocreation | date}}</td>
+            </tr>
+            <tr>
+              <th>Created Time</th>
+              <td>{{salary.tocreation | date: 'shortTime': '+0530'}}</td>
+            </tr>
+            <tr>
+              <th>Creator</th>
+              <td>{{getUserDisplayName(salary.creator)}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-8">
+      <mat-card class="">
+        <mat-card-title-group>
+          <mat-card-title>{{salary.code}}</mat-card-title>
+          <mat-card-subtitle>Salary</mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content>
+          <table class="w-100 table-striped custom-data-table">
+            <tbody>
+            <tr>
+              <th>Code</th>
+              <td>{{salary.code}}</td>
+            </tr>
+            <tr>
+              <th>Date</th>
+              <td>{{salary.date | date}}</td>
+            </tr>
+            <tr>
+              <th>Salary Amount</th>
+              <td>{{(salary.amount? salary.amount : 0) | currency: 'Rs. '}}</td>
+            </tr>
+            <tr *ngIf="salary.description">
+              <th>Description</th>
+              <td [innerHTML]="salary.description | nl2br"></td>
+            </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="d-flex mt-5">
+    <button *ngIf="privilege.delete" (click)="delete()" class="ml-0" mat-raised-button color="warn"><mat-icon>delete</mat-icon> Delete</button>
+    <span class="spacer"></span>
+    <button *ngIf="privilege.update" routerLink="/salaries/edit/{{salary.id}}" mat-raised-button color="accent"><mat-icon>edit</mat-icon> Change</button>
+    <button *ngIf="privilege.add" routerLink="/salaries/add" mat-stroked-button><mat-icon>add</mat-icon> New Salary</button>
+    <button *ngIf="privilege.showAll" routerLink="/salaries" class="mr-0" mat-raised-button color="primary"><mat-icon>list</mat-icon> All Salaries</button>
+  </div>
+</div>
+
+

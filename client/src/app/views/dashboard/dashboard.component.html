@@ -1,0 +1,144 @@
+<h3 class="mat-title">About Us</h3>
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div *ngIf="dashboardPrivilege.showCustomers" class="col-md-12">
+        <div class="dashboard-box-2">
+          <span class="dashboard-box-label">Enter Sri Lanka's freshest
+            grocery store for all your grocery needs- fresh to frozen
+            and everything in between! Now, you can order ALL your daily
+            necessities from the comfort of your home or anywhere you want! Choose
+            from same-day, next-day & saver to ensure you get what you need when you need it.</span>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<h3 class="mat-title">Last Week</h3>
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div *ngIf="dashboardPrivilege.showCustomers" class="col-md-3">
+        <div class="dashboard-box bg-info">
+          <div class="dashboard-box-data">
+            <table>
+              <tr>
+                <td><span class="dashboard-box-value">{{receentCustomerCount}}</span></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><mat-icon>supervised_user_circle</mat-icon></td>
+              </tr>
+            </table>
+            <span class="dashboard-box-label">Last Week Customers</span>
+          </div>
+          <div class="dashboard-box-link">
+            <a mat-button href="#" routerLink="customers">More Info<mat-icon>play_arrow</mat-icon></a>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="dashboardPrivilege.showPurchases" class="col-md-3">
+        <div class="dashboard-box bg-success">
+          <div class="dashboard-box-data">
+            <table>
+              <tr>
+                <td><span class="dashboard-box-value">{{receentPurchaseCount}}</span></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><mat-icon>store</mat-icon></td>
+              </tr>
+            </table>
+            <span class="dashboard-box-label">Last Week Purchases</span>
+          </div>
+          <div class="dashboard-box-link">
+            <a mat-button href="#" routerLink="purchases">More Info<mat-icon>play_arrow</mat-icon></a>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="dashboardPrivilege.showItems" class="col-md-3">
+        <div class="dashboard-box bg-warning">
+          <div class="dashboard-box-data">
+            <table>
+              <tr>
+                <td><span class="dashboard-box-value">{{receentItemCount}}</span></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><mat-icon>list_alt</mat-icon></td>
+              </tr>
+            </table>
+            <span class="dashboard-box-label">Last Week Items</span>
+          </div>
+          <div class="dashboard-box-link">
+            <a mat-button href="#" routerLink="items">More Info<mat-icon>play_arrow</mat-icon></a>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="dashboardPrivilege.showSales" class="col-md-3">
+        <div class="dashboard-box bg-danger">
+          <div class="dashboard-box-data">
+            <table>
+              <tr>
+                <td><span class="dashboard-box-value">{{receentSaleCount}}</span></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><mat-icon>add_shopping_cart</mat-icon></td>
+              </tr>
+            </table>
+            <span class="dashboard-box-label">Last Week Sales</span>
+          </div>
+          <div class="dashboard-box-link">
+            <a mat-button href="#" routerLink="sales">More Info<mat-icon>play_arrow</mat-icon></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<h3 class="mat-title">Categories</h3>
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div *ngIf="dashboardPrivilege.showCustomers" class="col-md-12">
+        <div class="dashboard-box-2">
+          <div class="dashboard-box-data">
+            <table>
+              <tr>
+                <td><span class="dashboard-box-label">Vegetables</span></td>
+                <td><span class="dashboard-box-label">Fruits</span></td>
+                <td><span class="dashboard-box-label">Personal Safety</span></td>
+              </tr>
+              <tr>
+                <td><span class="dashboard-box-label">Bakery</span></td>
+                <td><span class="dashboard-box-label">Beverages</span></td>
+                <td><span class="dashboard-box-label">Household</span></td>
+              </tr>
+              <tr>
+                <td><span class="dashboard-box-label">Dairy</span></td>
+                <td><span class="dashboard-box-label">Cooking Essentials</span></td>
+                <td><span class="dashboard-box-label">Pharmacy</span></td>
+              </tr>
+              <tr>
+                <td><span class="dashboard-box-label">Meats</span></td>
+                <td><span class="dashboard-box-label">Seafood</span></td>
+                <td><span class="dashboard-box-label">Snacks & Confectionery</span></td>
+              </tr>
+              <tr>
+                <td><span class="dashboard-box-label">Rice</span></td>
+                <td><span class="dashboard-box-label">Tea & Coffee</span></td>
+                <td><span class="dashboard-box-label">Seeds & Spices</span></td>
+              </tr>
+              <tr>
+                <td><span class="dashboard-box-label">Desserts & Ingredients</span></td>
+                <td><span class="dashboard-box-label">Pet Products</span></td>
+                <td><span class="dashboard-box-label">Beauty & Cosmetics</span></td>
+              </tr>
+              <tr>
+                <td><span class="dashboard-box-label">Party Shop</span></td>
+                <td><span class="dashboard-box-label">Gifting</span></td>
+                <td><span class="dashboard-box-label">Stationery</span></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

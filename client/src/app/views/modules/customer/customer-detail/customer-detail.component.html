@@ -1,0 +1,80 @@
+<app-no-privilege *ngIf="!privilege.showOne" message="No privilege to show more details of a customer"></app-no-privilege>
+<app-object-not-found *ngIf="loaded && !customer" message="Customer Not Found"></app-object-not-found>
+<app-loading *ngIf="!loaded"></app-loading>
+<div *ngIf="customer && privilege.showOne">
+  <app-page-header
+    title="Customer Detail Page of {{ customer.code + ' - ' + customer.name }}"
+    [breadcrumbSegments]="['Customers', 'Show All Customers', 'Details of ' + customer.code + ' - '+ customer.name]"
+  ></app-page-header>
+  <div class="row">
+    <div class="col-md-4">
+      <mat-card class="example-card">
+        <img mat-card-image src="{{photo ? photo: './assets/user.jpg'}}">
+        <mat-card-content>
+          <table class="w-100 table-striped custom-data-table">
+            <tbody>
+            <tr>
+              <th>Created Date</th>
+              <td>{{customer.tocreation | date}}</td>
+            </tr>
+            <tr>
+              <th>Created Time</th>
+              <td>{{customer.tocreation | date: 'shortTime': '+0530'}}</td>
+            </tr>
+            <tr>
+              <th>Creator</th>
+              <td>{{getUserDisplayName(customer.creator)}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-8">
+      <mat-card class="example-card">
+        <mat-card-content>
+          <table class="w-100 table-striped custom-data-table">
+            <tbody>
+            <tr>
+              <th>Code</th>
+              <td>{{customer.code}}</td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>{{customer.name}}</td>
+            </tr>
+            <tr>
+              <th>Contects</th>
+              <td>{{customer.contact1}}<span *ngIf="customer.contact2">,&nbsp;&nbsp;&nbsp;</span>{{customer.contact2}}</td>
+            </tr>
+            <tr *ngIf="customer.email">
+              <th>Email Address</th>
+              <td>{{customer.email}}</td>
+            </tr>
+            <tr *ngIf="customer.fax">
+              <th>Fax Number</th>
+              <td>{{customer.fax}}</td>
+            </tr>
+            <tr>
+              <th>Address</th>
+              <td [innerHTML]="customer.address | nl2br"></td>
+            </tr>
+            <tr *ngIf="customer.description">
+              <th>Description</th>
+              <td [innerHTML]="customer.description | nl2br"></td>
+            </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="d-flex mt-5">
+    <button *ngIf="privilege.delete" (click)="delete()" class="ml-0" mat-raised-button color="warn"><mat-icon>delete</mat-icon> Delete</button>
+    <span class="spacer"></span>
+    <button *ngIf="privilege.update" routerLink="/customers/edit/{{customer.id}}" mat-raised-button color="accent"><mat-icon>edit</mat-icon> Change</button>
+    <button *ngIf="privilege.add" routerLink="/customers/add" mat-stroked-button><mat-icon>add</mat-icon> New Customer</button>
+    <button *ngIf="privilege.showAll" routerLink="/customers" class="mr-0" mat-raised-button color="primary"><mat-icon>list</mat-icon> All Customers</button>
+  </div>
+</div>
+

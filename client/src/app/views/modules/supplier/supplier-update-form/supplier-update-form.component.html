@@ -1,0 +1,151 @@
+<app-no-privilege *ngIf="!privilege.update" message="No privilege to change supplier details"></app-no-privilege>
+<div *ngIf="this.supplier && privilege.update">
+  <app-page-header
+    title="Supplier Change Form of {{ supplier.code + ' - ' + supplier.name }}"
+    [breadcrumbSegments]="['Suppliers', 'Show All Suppliers', 'Change Details of ' +  supplier.code + ' - ' + supplier.name]"
+  ></app-page-header>
+  <form [formGroup]="form" (ngSubmit)="submit()" #ngForm="ngForm">
+    <mat-card>
+      <mat-card-content>
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-hint>Ex: Hassan</mat-hint>
+            <mat-error *ngIf="nameField.invalid">
+              <span *ngIf="nameField.errors.required">Name is required</span>
+              <span *ngIf="nameField.errors.server">{{nameField.errors.server.join(', ')}}</span>
+              <span *ngIf="nameField.errors.minlength">Name should contain at least 3 characters. </span>
+              <span *ngIf="nameField.errors.maxlength">Name should only contain at most 255 characters. </span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Logo</mat-label>
+            <app-file-chooser placeholder="No chosen logos to show" [min]="0" [max]="1" [accept]="['image/*']" formControlName="logo"></app-file-chooser>
+            <mat-hint>Select any image/* file</mat-hint>
+            <mat-error *ngIf="logoField.invalid">
+              <span *ngIf="logoField.errors.server">{{logoField.errors.server.join(', ')}}</span>
+              <span *ngIf="logoField.errors.max">Maximum allowed logo count is 1</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="suppliertype" required>
+              <mat-option *ngFor="let suppliertype of suppliertypes" [value]="suppliertype.id">{{suppliertype.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="suppliertypeField.invalid">
+              <span *ngIf="suppliertypeField.errors.required">Type is required</span>
+              <span *ngIf="suppliertypeField.errors.server">{{suppliertypeField.errors.server.join(', ')}}</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Primary Contact</mat-label>
+                <input matInput formControlName="contact1" required>
+                <mat-hint>Ex: 0779106766</mat-hint>
+                <mat-error *ngIf="contact1Field.invalid">
+                  <span *ngIf="contact1Field.errors.required">Primary contact is required</span>
+                  <span *ngIf="contact1Field.errors.server">{{contact1Field.errors.server.join(', ')}}</span>
+                  <span *ngIf="contact1Field.errors.minlength">Contact number length should be 10 characters. </span>
+                  <span *ngIf="contact1Field.errors.maxlength">Contact number length should be 10 characters. </span>
+                  <span *ngIf="contact1Field.errors.pattern">Invalid contact number. </span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Alternative Contact</mat-label>
+                <input matInput formControlName="contact2">
+                <mat-hint>Ex: 0919106766</mat-hint>
+                <mat-error *ngIf="contact2Field.invalid">
+                  <span *ngIf="contact2Field.errors.server">{{contact2Field.errors.server.join(', ')}}</span>
+                  <span *ngIf="contact2Field.errors.minlength">Contact number length should be 10 characters. </span>
+                  <span *ngIf="contact2Field.errors.maxlength">Contact number length should be 10 characters. </span>
+                  <span *ngIf="contact2Field.errors.pattern">Invalid contact number. </span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Email Address</mat-label>
+                <input matInput formControlName="email">
+                <mat-hint>Ex: user@gmail.com</mat-hint>
+                <mat-error *ngIf="emailField.invalid">
+                  <span *ngIf="emailField.errors.server">{{emailField.errors.server.join(', ')}}</span>
+                  <span *ngIf="emailField.errors.minlength">Email address should contain at least 3 characters. </span>
+                  <span *ngIf="emailField.errors.maxlength">Email address should only contain at most 255 characters. </span>
+                  <span *ngIf="emailField.errors.pattern">Invalid email address. </span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Fax Number</mat-label>
+                <input matInput formControlName="fax">
+                <mat-hint>Ex: 0919106766</mat-hint>
+                <mat-error *ngIf="faxField.invalid">
+                  <span *ngIf="faxField.errors.server">{{faxField.errors.server.join(', ')}}</span>
+                  <span *ngIf="faxField.errors.minlength">Fax number length should be 10 characters. </span>
+                  <span *ngIf="faxField.errors.maxlength">Fax number length should be 10 characters. </span>
+                  <span *ngIf="faxField.errors.pattern">Invalid fax number. </span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Address</mat-label>
+            <textarea matInput formControlName="address" required></textarea>
+            <mat-hint>Ex: 123, Galle Road, Galle.</mat-hint>
+            <mat-error *ngIf="addressField.invalid">
+              <span *ngIf="nameField.errors.required">Address is required</span>
+              <span *ngIf="addressField.errors.server">{{addressField.errors.server.join(', ')}}</span>
+              <span *ngIf="addressField.errors.minlength">Address should contain at least 3 characters. </span>
+              <span *ngIf="addressField.errors.maxlength">Address should only contain at most 65535 characters. </span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="supplierstatus" required>
+              <mat-option *ngFor="let supplierstatus of supplierstatuses" [value]="supplierstatus.id">{{supplierstatus.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="supplierstatusField.invalid">
+              <span *ngIf="supplierstatusField.errors.required">Status is required</span>
+              <span *ngIf="supplierstatusField.errors.server">{{supplierstatusField.errors.server.join(', ')}}</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" ></textarea>
+            <mat-error *ngIf="descriptionField.invalid">
+              <span *ngIf="descriptionField.errors.server">{{descriptionField.errors.server.join(', ')}}</span>
+              <span *ngIf="descriptionField.errors.maxlength">Description should only contain at most 65535 characters. </span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="text-right mt-5 d-flex">
+          <button *ngIf="privilege.showAll" routerLink="/suppliers" class="ml-0" mat-raised-button color="primary"><mat-icon>list</mat-icon> All Suppliers</button>
+          <span class="spacer"></span>
+          <button mat-stroked-button type="button" (click)="discardChanges()"><mat-icon>refresh</mat-icon> Discard Changes</button>
+          <button class="mr-0" mat-flat-button color="primary" type="submit"><mat-icon>save</mat-icon> Save</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
